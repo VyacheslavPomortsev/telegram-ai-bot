@@ -113,7 +113,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
-    await query.answer()
+    await query.answer("Думаю...")
 
     user = get_user(query.from_user.id)
 
@@ -136,7 +136,6 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def chat(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = get_user(update.message.from_user.id)
-    await query.answer("Думаю...")
     text = update.message.text
 
     user["history"].append({"role": "user", "content": text})
@@ -159,7 +158,7 @@ app = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
 
 app.add_handler(CommandHandler("start", start))
 app.add_handler(CallbackQueryHandler(button_handler))
-app.add_handler(MessageHandler(filters.VOICE, voice_to_text))
+# app.add_handler(MessageHandler(filters.VOICE, voice_to_text))
 app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, chat))
 
 print("ИИ-бот с памятью запущен...")
