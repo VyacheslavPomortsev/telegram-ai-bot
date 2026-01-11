@@ -136,6 +136,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def chat(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = get_user(update.message.from_user.id)
+    await query.answer("Думаю...")
     text = update.message.text
 
     user["history"].append({"role": "user", "content": text})
